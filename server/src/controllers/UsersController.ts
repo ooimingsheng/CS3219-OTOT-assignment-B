@@ -17,9 +17,13 @@ export async function create(request: Request, response: Response) {
 
 export async function getAll(request: Request, response: Response) {
   try {
-    const users = await getRepository(User).find();
+    const users = await getRepository(User).find({
+      order: {
+        id: "ASC",
+      },
+    });
     const usersData = users.map((user) => user.toJson());
-    response.status(HttpStatus.OK).json({ user: usersData });
+    response.status(HttpStatus.OK).json({ users: usersData });
   } catch (error) {
     response.sendStatus(HttpStatus.INTERNAL_SERVER_ERROR);
   }

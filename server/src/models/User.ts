@@ -14,12 +14,11 @@ export class User {
   @PrimaryGeneratedColumn()
   id!: number;
 
-  @IsNotEmpty()
   @IsEmail()
+  @Column({ type: "character varying", nullable: false })
   email!: string;
 
-  @Column({ type: "character varying", nullable: true })
-  @IsString()
+  @Column({ type: "character varying", nullable: false })
   name!: string;
 
   toJson = (): UserData => ({

@@ -1,21 +1,11 @@
 import { ConnectionOptions } from "typeorm";
 
-const POSTGRES_USERNAME="postgres"
-const POSTGRES_PASSWORD="postgres"
-const POSTGRES_HOST="localhost"
-const POSTGRES_PORT="5432"
-const POSTGRES_NAME="CS3219"
-const POSTGRES_DISABLE_SSL=true
-
-if (
-  !POSTGRES_USERNAME ||
-  !POSTGRES_PASSWORD ||
-  !POSTGRES_HOST ||
-  !POSTGRES_PORT ||
-  !POSTGRES_NAME
-) {
-  throw new Error("Missing database config!");
-}
+const POSTGRES_USERNAME = "postgres";
+const POSTGRES_PASSWORD = "postgres";
+const POSTGRES_HOST = "localhost";
+const POSTGRES_PORT = "5432";
+const POSTGRES_NAME = "CS3219";
+const POSTGRES_DISABLE_SSL = true;
 
 export const postgres: ConnectionOptions = {
   type: "postgres",
@@ -24,10 +14,10 @@ export const postgres: ConnectionOptions = {
   host: POSTGRES_HOST,
   port: Number(POSTGRES_PORT),
   database: POSTGRES_NAME,
-  ssl: POSTGRES_DISABLE_SSL ? false : true,
-  synchronize: process.env.NODE_ENV !== "production",
+  ssl: !POSTGRES_DISABLE_SSL,
+  synchronize: true,
   logging: false,
-  entities: [`${__dirname}/src/entities/**/*.js`, "src/entities/**/*.ts"],
+  entities: [`${__dirname}/src/models/**/*.js`, "src/models/**/*.ts"],
   migrations: [`${__dirname}/src/migrations/**/*.js`, "src/migrations/**/*.ts"],
   subscribers: [
     `${__dirname}/src/subscribers/**/*.js`,

@@ -1,3 +1,4 @@
+import bodyParser from "body-parser";
 import cors, { CorsOptions } from "cors";
 import express from "express";
 import { Server } from "http";
@@ -7,7 +8,7 @@ import ormconfig from "../ormconfig";
 import routes from "./routes";
 
 const corsOptions: CorsOptions = {
-  origin: "*",
+  origin: process.env.NODE_ENV === "production" ? "http://example.com" : "*",
 };
 
 export class ApiServer {
@@ -16,13 +17,14 @@ export class ApiServer {
 
   async initialize(port: number = 3001) {
     this.connection = await createConnection(ormconfig);
+    await this.connection.synchronize();
+    console.log("connected to port ", port);
 
     const app = express();
-    app.use("/", routes);
+    app.use(bodyParser.json());
     app.use(cors(corsOptions));
+    app.use("/", routes);
     this.server = app.listen(port);
-
-    await this.connection.query("CREATE EXTENSION IF NOT EXISTS tablefunc;");
   }
 
   async close() {
