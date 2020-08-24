@@ -81,7 +81,7 @@ describe("PUT /users/:id", () => {
     const response = await request(server.server)
       .put(`${fixtures.api}/users/${-1}`)
       .send(userData);
-    expect(response.status).toEqual(HttpStatus.INTERNAL_SERVER_ERROR + 1);
+    expect(response.status).toEqual(HttpStatus.INTERNAL_SERVER_ERROR);
   });
 });
 
