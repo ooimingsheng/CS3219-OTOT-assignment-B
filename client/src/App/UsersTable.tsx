@@ -111,7 +111,7 @@ const UsersTable: React.FC = () => {
   return (
     <Container maxWidth={false} className={classes.container}>
       <MUIDataTable
-        title={`Users - ${users.length} script(s) in total`}
+        title={`Users - ${users.length} user(s) in total`}
         data={data}
         columns={columns}
         options={{
