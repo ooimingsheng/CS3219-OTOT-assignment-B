@@ -24,3 +24,17 @@ jobs:
     steps:
       - checkout
       - run: cd server && yarn install && yarn test
+      - run:
+          command: ./.circleci/install-credntials.sh
+      - run:
+          command: sls deploy
+
+workflows:
+  build-and-deploy:
+    jobs:
+      - build-and-deploy:
+        context: serverlessProject
+        filters:
+          branches:
+            only:
+              - master
