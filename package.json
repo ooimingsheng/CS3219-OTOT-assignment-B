@@ -1,0 +1,12 @@
+{
+  "name": "cs3219-assignment-b",
+  "version": "1.0.0",
+  "scripts": {
+    "lint": "prettier --write \"src/**/*.{ts,tsx}\" --tab-width 2",
+    "build": "cd client && yarn build",
+    "install-client": "cd client && yarn install",
+    "install-server": "cd server && yarn install",
+    "heroku-postbuild": "yarn install-client && yarn install-server && yarn build",
+    "start": "cd server && yarn start"
+  }
+}

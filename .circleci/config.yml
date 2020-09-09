@@ -2,8 +2,18 @@
 #
 # Check https://circleci.com/docs/2.0/language-javascript/ for more details
 #
-version: 2
-jobs:
+version: 2.1
+orbs:
+  node: circleci/node@1.1.6
+
+workflows: # Define a Workflow running the build job, then the deploy job
+  version: 2
+  build-deploy: # Make a workflow to build and deploy your project
+    jobs:
+      - build
+
+            
+jobs: # Define the build and deploy jobs
   build:
     docker:
       # specify the version you desire here
@@ -13,11 +23,6 @@ jobs:
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: postgres
           POSTGRES_DB: CS3219
-
-      # Specify service dependencies here if necessary
-      # CircleCI maintains a library of pre-built images
-      # documented at https://circleci.com/docs/2.0/circleci-images/
-      # - image: circleci/mongo:3.4.4
 
     working_directory: ~/repo
 

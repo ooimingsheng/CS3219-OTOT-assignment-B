@@ -4,7 +4,7 @@ import { csrfToken } from "./helpers/server-context";
 const client = axios.create({
   baseURL:
     process.env.NODE_ENV === "production"
-      ? "https://somecoolurl.com/api"
+      ? "https://pure-depths-53034.herokuapp.com/api"
       : "http://localhost:3001/api",
   timeout: 30000,
   headers: {
