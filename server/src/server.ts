@@ -1,5 +1,5 @@
 import bodyParser from "body-parser";
-import cors, { CorsOptions } from "cors";
+import cors from "cors";
 import express from "express";
 import { Server } from "http";
 import "reflect-metadata";
@@ -8,10 +8,6 @@ import ormconfig from "../ormconfig";
 import routes from "./routes";
 
 const isDeployed = process.env.NODE_ENV === "production";
-
-const corsOptions: CorsOptions = {
-  origin: isDeployed ? "http://example.com" : "*",
-};
 
 export class ApiServer {
   public connection: Connection | null = null;
@@ -25,7 +21,7 @@ export class ApiServer {
 
     const app = express();
     app.use(bodyParser.json());
-    app.use(cors(corsOptions));
+    app.use(cors());
     app.use(express.static("../client/build"));
     app.use("/", routes);
     this.server = app.listen(port);
