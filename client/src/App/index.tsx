@@ -21,6 +21,7 @@ const ActiveApp: React.FC = () => {
 const App: React.FC = () => {
   return (
     <StylesProvider injectFirst>
+      amazing
       <ActiveApp />
     </StylesProvider>
   );
